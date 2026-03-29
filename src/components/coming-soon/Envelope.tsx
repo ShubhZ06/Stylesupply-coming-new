@@ -1,72 +1,101 @@
-import type { ReactNode } from "react";
+"use client";
 
-interface EnvelopeProps {
-  children: ReactNode;
-}
+import { useState, useEffect } from "react";
 
 /**
- * Envelope — maroon letter envelope rendered entirely from CSS.
+ * Envelope — layered envelope with hover-reveal card animation.
  *
  * Layers (bottom → top):
- *   1. Envelope body   — left/right/bottom fold triangles
- *   2. White card      — peeks above the flap (z:1)
- *   3. Open flap       — triangle pointing downward, overlaps card bottom (z:2)
+ *   1. Back flap     — /Mask group.svg     (envelope rear, z-0)
+ *   2. White card    — /Group 1778.svg     (peeks from the V-opening, z-10)
+ *   3. Front pocket  — /Mask group (1).svg (front folds, z-20)
  *
- * On load the envelope scales in and the card slides upward out of it.
+ * On page load the whole envelope scales in.
+ * On hover the white card translates upward to peek out more.
+ * On mobile, it auto-peeks after 1 second.
  */
-export function Envelope({ children }: EnvelopeProps) {
+export function Envelope() {
+  const [peek, setPeek] = useState(false);
+
+  useEffect(() => {
+    // Auto-peek the card on mobile devices after 1 second
+    const timer = setTimeout(() => {
+      if (window.innerWidth < 640) {
+        setPeek(true);
+      }
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div
-      className="w-full max-w-[295px] sm:max-w-[340px] mx-auto mt-6"
-      style={{ animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both" }}
+      className="group relative w-full max-w-[340px] sm:max-w-[380px] mx-auto -mt-7 cursor-pointer z-10"
+      style={{
+        animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both",
+      }}
     >
-      {/* White card — slides up out of the envelope on load */}
-      <div
-        className="relative"
-        style={{
-          zIndex: 1,
-          animation: "card-emerge 1s cubic-bezier(0.34,1.45,0.64,1) 0.35s both",
-        }}
-      >
-        {children}
-      </div>
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "298/378" }}>
 
-      {/* Open flap — downward-pointing triangle, overlaps bottom of card */}
-      <div
-        className="relative -mt-5"
-        style={{
-          zIndex: 2,
-          height: "66px",
-          background: "linear-gradient(170deg, #8b0223 0%, #6c011a 55%, #7a021d 100%)",
-          clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-          filter: "drop-shadow(0 -2px 6px rgba(0,0,0,0.35))",
-        }}
-      />
-
-      {/* Envelope body */}
-      <div
-        className="relative overflow-hidden rounded-b-2xl"
-        style={{ height: "112px" }}
-      >
-        {/* Base panel */}
-        <div className="absolute inset-0 bg-[#7a021d]" />
-
-        {/* Left fold */}
-        <div
-          className="absolute inset-0 bg-[#520014]"
-          style={{ clipPath: "polygon(0 0, 50% 54%, 0 100%)" }}
+        {/* ── Layer 1: Back flap (defines full envelope size) ─── */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/Mask group.svg"
+          alt=""
+          aria-hidden
+          draggable={false}
+          className="absolute inset-0 w-full h-full select-none z-0"
         />
 
-        {/* Right fold */}
+        {/* ── Layer 2: White card ────────────────────────────── */}
+        {/*
+          Positioned so the top of the card peeks out from the
+          V-shaped opening of the front pocket.
+          On hover it rises a bit more.
+        */}
         <div
-          className="absolute inset-0 bg-[#520014]"
-          style={{ clipPath: "polygon(100% 0, 50% 54%, 100% 100%)" }}
-        />
+          className={`absolute left-1/2 top-[20%] z-10 w-[96%] -translate-x-1/2 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] sm:group-hover:-translate-y-[22%] ${peek ? '-translate-y-[22%]' : ''}`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Group 1778.svg"
+            alt="StyleSupply Coming Soon — Preview Card"
+            draggable={false}
+            className="w-full h-auto select-none rounded-[12px]"
+          />
 
-        {/* Bottom crease */}
-        <div
-          className="absolute inset-0 bg-[#460011]"
-          style={{ clipPath: "polygon(29% 100%, 50% 54%, 71% 100%)" }}
+          {/* Social Icons Overlay */}
+          <div className="absolute top-[72%] inset-x-0 flex items-center justify-center gap-1 sm:gap-2 z-20 pointer-events-auto">
+            <a
+              href="https://www.instagram.com/stylesupply.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 transition-transform hover:scale-110 flex items-center justify-center"
+              aria-label="Instagram"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icon/Frame 3748.svg" alt="Instagram" className="w-[28px] h-[30px] sm:w-[32px] sm:h-[34px]" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/style-supply-co/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 transition-transform hover:scale-110 flex items-center justify-center"
+              aria-label="LinkedIn"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icon/Frame 3747.svg" alt="LinkedIn" className="w-[28px] h-[30px] sm:w-[32px] sm:h-[34px]" />
+            </a>
+          </div>
+        </div>
+
+        {/* ── Layer 3: Front pocket (covers bottom of the card) ── */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/Mask group (1).svg"
+          alt=""
+          aria-hidden
+          draggable={false}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[108%] h-auto select-none pointer-events-none"
         />
       </div>
     </div>

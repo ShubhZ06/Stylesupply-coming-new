@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { ASSETS } from "./assets";
+import dynamic from "next/dynamic";
+
+const Silk = dynamic(() => import("./Silk"), { ssr: false });
 
 interface BackgroundProps {
   children: ReactNode;
@@ -10,10 +12,10 @@ interface BackgroundProps {
 type Stage = "button" | "email" | "success";
 
 /**
- * Background — full-page dark maroon background with fabric texture overlay.
+ * Background — full-page dark maroon background with animated Silk shader overlay.
  *
  * Renders:
- *   - Fabric texture image (mix-blend-mode: color-burn)
+ *   - Silk WebGL shader background
  *   - "Join the waitlist to be first in line." heading
  *   - children slot (envelope + white card)
  *   - "14th April" launch date
@@ -37,30 +39,26 @@ export function Background({ children }: BackgroundProps) {
 
   return (
     <main className="relative min-h-dvh bg-brand-dark overflow-hidden flex flex-col items-center">
-      {/* Fabric texture overlay */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={ASSETS.bgTexture}
-        alt=""
-        aria-hidden
-        className="absolute pointer-events-none select-none object-cover mix-blend-color-burn"
-        style={{
-          width: "160vw",
-          height: "160vh",
-          top: "-30vh",
-          left: "-30vw",
-        }}
-      />
+      {/* Animated Silk shader background */}
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <Silk
+          speed={5}
+          scale={0.7}
+          color="#b11b2a"
+          noiseIntensity={1}
+          rotation={0}
+        />
+      </div>
 
       {/* Centered content column */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
 
         {/* Heading */}
         <h1
-          className="mt-17.5 text-white font-medium text-[38px] sm:text-[44px] text-center w-full sm:w-105.5"
-          style={{ lineHeight: "1.22", animation: "stagger-up 0.7s ease-out 0s both" }}
+          className="mt-17.5 w-full text-center text-[40px] font-medium leading-[1.22] text-white sm:w-105.5 sm:text-[46px]"
+          style={{ animation: "stagger-up 0.7s ease-out 0s both" }}
         >
-          Join the waitlist to be first<sup className="text-[0.6em] align-super">+</sup> in line.
+          Join the waitlist to be first in line.
         </h1>
 
         {/* Envelope + WhiteCard slot */}
@@ -68,7 +66,7 @@ export function Background({ children }: BackgroundProps) {
 
         {/* Launch date */}
         <p
-          className="mt-8 font-semibold text-silver text-[19.4px] tracking-[-0.04em] whitespace-nowrap"
+          className="mt-3 font-semibold text-silver text-[21.4px] tracking-[-0.04em] whitespace-nowrap"
           style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
         >
           14th April
@@ -76,7 +74,7 @@ export function Background({ children }: BackgroundProps) {
 
         {/* CTA area */}
         <div
-          className="mt-[19px] flex flex-col items-center gap-[19px] w-full pb-14"
+          className="mt-3 flex flex-col items-center gap-[19px] w-full pb-14"
           style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}
         >
 
@@ -85,8 +83,7 @@ export function Background({ children }: BackgroundProps) {
             <button
               type="button"
               onClick={() => setStage("email")}
-              className="bg-white rounded-full font-bold text-[15.4px] text-brand tracking-[-0.06em] hover:opacity-90 active:scale-95 transition-all duration-150"
-              style={{ width: "192px", paddingTop: "16px", paddingBottom: "16px" }}
+              className="w-[192px] rounded-full bg-white py-4 text-[17.4px] font-bold tracking-[-0.06em] text-brand transition-all duration-150 hover:opacity-90 active:scale-95"
             >
               Join Now
             </button>
@@ -96,8 +93,7 @@ export function Background({ children }: BackgroundProps) {
           {stage === "email" && (
             <form
               onSubmit={handleSubmit}
-              className="flex items-center bg-white rounded-full pl-5 pr-1.5 py-1.5 gap-2"
-              style={{ width: "260px" }}
+              className="flex w-[260px] items-center gap-2 rounded-full bg-white py-1.5 pl-5 pr-1.5"
             >
               <input
                 type="email"
@@ -107,19 +103,17 @@ export function Background({ children }: BackgroundProps) {
                 required
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
-                className="flex-1 min-w-0 text-[13px] text-brand-dark placeholder:text-brand-dark/40 font-medium bg-transparent outline-none"
+                className="flex-1 min-w-0 text-[15px] text-brand-dark placeholder:text-brand-dark/40 font-medium bg-transparent outline-none"
               />
               <button
                 type="submit"
                 disabled={loading}
                 aria-label="Submit email"
-                className="flex items-center justify-center shrink-0 bg-brand rounded-full hover:opacity-80 active:scale-90 transition-all duration-150 disabled:opacity-50"
-                style={{ width: "38px", height: "38px" }}
+                className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-brand transition-all duration-150 hover:opacity-80 disabled:opacity-50 active:scale-90"
               >
                 {loading ? (
                   <span
-                    className="block rounded-full border-2 border-white border-t-transparent animate-spin"
-                    style={{ width: "14px", height: "14px" }}
+                    className="block h-[14px] w-[14px] animate-spin rounded-full border-2 border-white border-t-transparent"
                   />
                 ) : (
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
@@ -138,12 +132,14 @@ export function Background({ children }: BackgroundProps) {
 
           {/* Stage 3 — Success */}
           {stage === "success" && (
-            <p className="font-semibold text-white text-[17px] tracking-[-0.03em] text-center px-4">
-              Welcome to StyleSupply!
-            </p>
+            <div className="flex w-[260px] items-center justify-center rounded-full bg-[#25080A] py-3.5">
+              <p className="text-center text-[19px] font-semibold tracking-[-0.03em] text-[#FFFFFF]">
+                Welcome to StyleSupply!
+              </p>
+            </div>
           )}
 
-          <p className="font-medium text-white text-[13.4px] text-center leading-[1.1]">
+          <p className="font-medium text-white text-[15.4px] text-center leading-[1.1]">
             Your First Month, On Us.
           </p>
         </div>
