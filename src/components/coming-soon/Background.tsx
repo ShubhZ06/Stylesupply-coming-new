@@ -40,7 +40,7 @@ export function Background({ children }: BackgroundProps) {
         src="/image/bg2%201.svg"
         alt=""
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none sm:object-center object-top"
+        className="fixed inset-0 w-full h-full object-cover pointer-events-none select-none sm:object-center object-top"
       />
 
       {/* Centered content column */}
