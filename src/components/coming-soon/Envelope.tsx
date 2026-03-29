@@ -3,99 +3,202 @@
 import { useState, useEffect } from "react";
 
 /**
- * Envelope — layered envelope with hover-reveal card animation.
+ * SVG viewBox dimensions:
+ *   Mask group (4).svg       319 × 390  — back envelope
+ *   Rectangle 18940 (1).svg  316 × 302  — white card
+ *   Frame 5303.svg           273 × 106  — photo strip
+ *   Coming Soon (1).svg       50 × 8    — label
+ *   STYLESUPPLY (1).svg      254 × 50   — logo
+ *   Mask group (5).svg       302 × 223  — front flap
  *
- * Layers (bottom → top):
- *   1. Back flap     — /Mask group.svg     (envelope rear, z-0)
- *   2. White card    — /Group 1778.svg     (peeks from the V-opening, z-10)
- *   3. Front pocket  — /Mask group (1).svg (front folds, z-20)
- *
- * On page load the whole envelope scales in.
- * On hover the white card translates upward to peek out more.
- * On mobile, it auto-peeks after 1 second.
+ * Card internal rect: x=-0.86, y=16.3, w=301.7, h=286.8  (rotated -3.27deg)
+ * Positions below are % of card viewBox 316×302.
  */
 export function Envelope() {
   const [peek, setPeek] = useState(false);
 
   useEffect(() => {
-    // Auto-peek the card on mobile devices after 1 second
     const timer = setTimeout(() => {
-      if (window.innerWidth < 640) {
-        setPeek(true);
-      }
+      if (window.innerWidth < 640) setPeek(true);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      className="group relative w-full max-w-[340px] sm:max-w-[380px] mx-auto -mt-7 cursor-pointer z-10"
+      className="group relative mx-auto mt-6 cursor-pointer z-10"
       style={{
+        width: "min(380px, 92vw)",
         animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both",
       }}
+      onMouseEnter={() => setPeek(true)}
+      onMouseLeave={() => setPeek(false)}
     >
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "298/378" }}>
+      {/* Root sized to back envelope 319×390 */}
+      <div className="relative w-full" style={{ paddingBottom: `${(390 / 319) * 100}%` }}>
 
-        {/* ── Layer 1: Back flap (defines full envelope size) ─── */}
+        {/* ── Layer 0: Back envelope ── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/Mask group.svg"
+          src="/image/Mask%20group%20(4).svg"
           alt=""
           aria-hidden
           draggable={false}
-          className="absolute inset-0 w-full h-full select-none z-0"
+          className="absolute inset-0 w-full h-full select-none pointer-events-none"
+          style={{ zIndex: 0 }}
         />
 
-        {/* ── Layer 2: White card ────────────────────────────── */}
         {/*
-          Positioned so the top of the card peeks out from the
-          V-shaped opening of the front pocket.
-          On hover it rises a bit more.
+          ── Layer 1: White card ──
+          Card: 316×302 → width = 316/319 = 99% of envelope
+          Card height relative to envelope: 302/390 = 77.4%
+
+          Default: top=18% → card bottom = 18%+77.4% = 95.4% (inside envelope)
+          Peek:    top=2%  → card top at 2%, photos visible above flap (~43%)
         */}
         <div
-          className={`absolute left-1/2 top-[20%] z-10 w-[96%] -translate-x-1/2 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] sm:group-hover:-translate-y-[22%] ${peek ? '-translate-y-[22%]' : ''}`}
+          className="absolute"
+          style={{
+            zIndex: 10,
+            width: "92%",
+            left: "4%",
+            top: peek ? "2%" : "12%",
+            transition: "top 0.5s cubic-bezier(0.34,1.56,0.64,1)",
+          }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/Group 1778.svg"
-            alt="StyleSupply Coming Soon — Preview Card"
-            draggable={false}
-            className="w-full h-auto select-none rounded-[12px]"
-          />
+          {/* Card aspect ratio: 302/316 = 95.6% */}
+          <div className="relative w-full" style={{ paddingBottom: `${(302 / 316) * 100}%` }}>
 
-          {/* Social Icons Overlay */}
-          <div className="absolute top-[72%] inset-x-0 flex items-center justify-center gap-1 sm:gap-2 z-20 pointer-events-auto">
-            <a
-              href="https://www.instagram.com/stylesupply.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 transition-transform hover:scale-110 flex items-center justify-center"
-              aria-label="Instagram"
+            {/* White card base */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/image/Rectangle%2018940%20(1).svg"
+              alt=""
+              aria-hidden
+              draggable={false}
+              className="absolute inset-0 w-full h-full object-fill select-none pointer-events-none"
+            />
+
+            {/*
+              Photo strip: 273×106 on card 316×302
+              width  = 273/316 = 86.4%
+              height = 106/302 = 35.1%
+              left   = (316-273)/2/316 = 6.8%
+              top    = 16/302 = 5.3% (internal SVG offset)
+            */}
+            <div
+              className="absolute overflow-hidden"
+              style={{
+                width: "86.4%",
+                left: "6.8%",
+                top: "5.3%",
+                height: "35.1%",
+                borderRadius: "6px 6px 3px 3px",
+              }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icon/Frame 3748.svg" alt="Instagram" className="w-[28px] h-[30px] sm:w-[32px] sm:h-[34px]" />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/style-supply-co/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 transition-transform hover:scale-110 flex items-center justify-center"
-              aria-label="LinkedIn"
+              <img
+                src="/image/Frame%205303.svg"
+                alt="Fashion preview"
+                draggable={false}
+                className="w-full h-full object-fill select-none"
+              />
+            </div>
+
+            {/*
+              Coming Soon: 50×8 on card 316×302
+              top = 5.3% + 35.1% + 2% = 42.4%
+              width = 50/316 = 15.8%, centered
+            */}
+            <div
+              className="absolute flex justify-center w-full"
+              style={{ top: "43%", left: 0 }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icon/Frame 3747.svg" alt="LinkedIn" className="w-[28px] h-[30px] sm:w-[32px] sm:h-[34px]" />
-            </a>
+              <img
+                src="/image/Coming%20Soon%20(1).svg"
+                alt="Coming Soon"
+                draggable={false}
+                className="select-none"
+                style={{ width: "15.8%", height: "auto" }}
+              />
+            </div>
+
+            {/*
+              STYLESUPPLY: 254×50 on card 316×302
+              width = 254/316 = 80.4%, centered
+              top ≈ 50%
+            */}
+            <div
+              className="absolute flex justify-center w-full"
+              style={{ top: "50%", left: 0 }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/image/STYLESUPPLY%20(1).svg"
+                alt="StyleSupply"
+                draggable={false}
+                className="select-none"
+                style={{ width: "80.4%", height: "auto" }}
+              />
+            </div>
+
+            {/* Social icons: top ≈ 72%, centered */}
+            <div
+              className="absolute flex justify-center items-center gap-2 w-full"
+              style={{ top: "72%", left: 0 }}
+            >
+              <a
+                href="https://www.instagram.com/stylesupply.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="transition-transform hover:scale-110"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/icon/Frame%203748.svg"
+                  alt="Instagram"
+                  draggable={false}
+                  className="select-none"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/style-supply-co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="transition-transform hover:scale-110"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/icon/Frame%203747.svg"
+                  alt="LinkedIn"
+                  draggable={false}
+                  className="select-none"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* ── Layer 3: Front pocket (covers bottom of the card) ── */}
+        {/* ── Layer 2: Front flap — anchored to bottom, full width ── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/Mask group (1).svg"
+          src="/image/Mask%20group%20(5).svg"
           alt=""
           aria-hidden
           draggable={false}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[108%] h-auto select-none pointer-events-none"
+          className="absolute select-none pointer-events-none"
+          style={{
+            zIndex: 20,
+            width: "100%",
+            left: "0",
+            bottom: "0",
+            height: "auto",
+          }}
         />
       </div>
     </div>

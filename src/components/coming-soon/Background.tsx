@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import dynamic from "next/dynamic";
 
-const Silk = dynamic(() => import("./Silk"), { ssr: false });
 
 interface BackgroundProps {
   children: ReactNode;
@@ -11,17 +9,6 @@ interface BackgroundProps {
 
 type Stage = "button" | "email" | "success";
 
-/**
- * Background — full-page dark maroon background with animated Silk shader overlay.
- *
- * Renders:
- *   - Silk WebGL shader background
- *   - "Join the waitlist to be first in line." heading
- *   - children slot (envelope + white card)
- *   - "14th April" launch date
- *   - "Join Now" CTA (expands to email input, then success state)
- *   - "Your First Month, On Us." subtext
- */
 export function Background({ children }: BackgroundProps) {
   const [stage, setStage] = useState<Stage>("button");
   const [email, setEmail] = useState("");
@@ -47,17 +34,14 @@ export function Background({ children }: BackgroundProps) {
   };
 
   return (
-    <main className="relative min-h-dvh bg-brand-dark overflow-hidden flex flex-col items-center">
-      {/* Animated Silk shader background */}
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <Silk
-          speed={5}
-          scale={0.7}
-          color="#b11b2a"
-          noiseIntensity={1}
-          rotation={0}
-        />
-      </div>
+    <main className="relative min-h-dvh overflow-hidden flex flex-col items-center">
+      {/* Silk fabric photo background */}
+      <img
+        src="/image/bg2%201.svg"
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+      />
 
       {/* Centered content column */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
