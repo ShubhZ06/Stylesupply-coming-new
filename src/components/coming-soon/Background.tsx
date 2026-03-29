@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import Image from "next/image";
 
 interface BackgroundProps {
   children: ReactNode;
@@ -34,11 +35,14 @@ export function Background({ children }: BackgroundProps) {
 
   return (
     <main className="relative min-h-dvh flex flex-col items-center">
-      <img
-        src="/image/bg2%201.png"
+      <Image
+        src="/image/bg2 1.png"
         alt=""
         aria-hidden
-        className="fixed inset-0 w-full h-full object-cover pointer-events-none select-none sm:object-center object-top"
+        fill
+        priority
+        quality={80}
+        className="fixed object-cover pointer-events-none select-none sm:object-center object-top"
       />
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
