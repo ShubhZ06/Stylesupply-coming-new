@@ -60,7 +60,7 @@ export function Background({ children }: BackgroundProps) {
           className="mt-17.5 text-white font-medium text-[38px] sm:text-[44px] text-center w-full sm:w-105.5"
           style={{ lineHeight: "1.22", animation: "stagger-up 0.7s ease-out 0s both" }}
         >
-          Join the waitlist to be first<sup className="text-[0.6em] align-super">+</sup> in line.
+          Join the waitlist to be first<sup className="text-[0.6em] align-super"></sup> in line.
         </h1>
 
         {/* Envelope + WhiteCard slot */}
