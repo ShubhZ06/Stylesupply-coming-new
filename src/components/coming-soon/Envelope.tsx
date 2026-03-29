@@ -3,16 +3,10 @@
 import { useState, useEffect } from "react";
 
 /**
- * SVG viewBox dimensions:
- *   Mask group (4).svg       319 × 390  — back envelope
- *   Rectangle 18940 (1).svg  316 × 302  — white card
- *   Frame 5303.svg           273 × 106  — photo strip
- *   Coming Soon (1).svg       50 × 8    — label
- *   STYLESUPPLY (1).svg      254 × 50   — logo
- *   Mask group (5).svg       302 × 223  — front flap
- *
- * Card internal rect: x=-0.86, y=16.3, w=301.7, h=286.8  (rotated -3.27deg)
- * Positions below are % of card viewBox 316×302.
+ * Layer order (bottom → top):
+ *   Layer 0: Mask group (2).png  — open envelope body (back)
+ *   Layer 1: Rectangle 18940 (1).png + card contents — white card that peeks up
+ *   Layer 2: Mask group (1).png  — closed front flap overlaying bottom of card
  */
 export function Envelope() {
   const [peek, setPeek] = useState(false);
@@ -35,13 +29,13 @@ export function Envelope() {
       onMouseEnter={() => setPeek(true)}
       onMouseLeave={() => setPeek(false)}
     >
-      {/* Root sized to back envelope 319×390 */}
+      {/* Root sized to open envelope aspect: Mask group (2) */}
       <div className="relative w-full" style={{ paddingBottom: `${(390 / 319) * 100}%` }}>
 
-        {/* ── Layer 0: Back envelope ── */}
+        {/* ── Layer 0: Open envelope body (back) ── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/image/Mask%20group%20(4).svg"
+          src="/image/Mask%20group%20(2).png"
           alt=""
           aria-hidden
           draggable={false}
@@ -49,44 +43,31 @@ export function Envelope() {
           style={{ zIndex: 0 }}
         />
 
-        {/*
-          ── Layer 1: White card ──
-          Card: 316×302 → width = 316/319 = 99% of envelope
-          Card height relative to envelope: 302/390 = 77.4%
-
-          Default: top=18% → card bottom = 18%+77.4% = 95.4% (inside envelope)
-          Peek:    top=2%  → card top at 2%, photos visible above flap (~43%)
-        */}
+        {/* ── Layer 1: White card (slides up on hover) ── */}
         <div
           className="absolute"
           style={{
             zIndex: 10,
-            width: "92%",
-            left: "4%",
-            top: mobilePeek ? "5%" : peek ? "2%" : "12%",
+            width: "95%",
+            left: "2%",
+            top: mobilePeek ? "8%" : peek ? "2%" : "10%",
             transition: "top 0.5s cubic-bezier(0.34,1.56,0.64,1)",
           }}
         >
-          {/* Card aspect ratio: 302/316 = 95.6% */}
+          {/* Card aspect ratio: ~302/316 */}
           <div className="relative w-full" style={{ paddingBottom: `${(302 / 316) * 100}%` }}>
 
             {/* White card base */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/image/Rectangle%2018940%20(1).svg"
+              src="/image/Rectangle%2018940%20(1).png"
               alt=""
               aria-hidden
               draggable={false}
               className="absolute inset-0 w-full h-full object-fill select-none pointer-events-none"
             />
 
-            {/*
-              Photo strip: 273×106 on card 316×302
-              width  = 273/316 = 86.4%
-              height = 106/302 = 35.1%
-              left   = (316-273)/2/316 = 6.8%
-              top    = 16/302 = 5.3% (internal SVG offset)
-            */}
+            {/* Photo strip */}
             <div
               className="absolute overflow-hidden"
               style={{
@@ -99,18 +80,14 @@ export function Envelope() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/image/Frame%205303.svg"
+                src="/image/Frame%205303.png"
                 alt="Fashion preview"
                 draggable={false}
                 className="w-full h-full object-fill select-none"
               />
             </div>
 
-            {/*
-              Coming Soon: 50×8 on card 316×302
-              top = 5.3% + 35.1% + 2% = 42.4%
-              width = 50/316 = 15.8%, centered
-            */}
+            {/* Coming Soon label */}
             <div
               className="absolute flex justify-center w-full"
               style={{ top: "43%", left: 0 }}
@@ -125,11 +102,7 @@ export function Envelope() {
               />
             </div>
 
-            {/*
-              STYLESUPPLY: 254×50 on card 316×302
-              width = 254/316 = 80.4%, centered
-              top ≈ 50%
-            */}
+            {/* STYLESUPPLY logo */}
             <div
               className="absolute flex justify-center w-full"
               style={{ top: "46%", left: 0 }}
@@ -144,7 +117,7 @@ export function Envelope() {
               />
             </div>
 
-            {/* Social icons: top ≈ 72%, centered */}
+            {/* Social icons */}
             <div
               className="absolute flex justify-center items-center gap-2 w-full"
               style={{ top: "65%", left: 0, transform: "rotate(-3.27deg)" }}
@@ -185,18 +158,18 @@ export function Envelope() {
           </div>
         </div>
 
-        {/* ── Layer 2: Front flap — anchored to bottom, full width ── */}
+        {/* ── Layer 2: Closed front flap — sits on top, covers bottom of card ── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/image/Mask%20group%20(5).svg"
+          src="/image/Mask%20group%20(1).png"
           alt=""
           aria-hidden
           draggable={false}
           className="absolute select-none pointer-events-none"
           style={{
             zIndex: 20,
-            width: "95%",
-            left: "4.9%",
+            width: "100%",
+            left: "0%",
             bottom: "0",
             height: "auto",
           }}
