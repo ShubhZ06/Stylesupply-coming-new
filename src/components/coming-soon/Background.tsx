@@ -78,7 +78,7 @@ export function Background({ children }: BackgroundProps) {
             <button
               type="button"
               onClick={() => setStage("email")}
-              className="w-[192px] rounded-full bg-white py-4 text-[17.4px] font-bold tracking-[-0.06em] text-brand transition-all duration-150 hover:opacity-90 active:scale-95"
+              className="w-[192px] rounded-full bg-white py-4 text-[17.4px] font-bold tracking-[-0.06em] text-brand transition-all duration-150 hover:opacity-90 active:scale-x-95"
             >
               Join Now
             </button>
@@ -88,7 +88,7 @@ export function Background({ children }: BackgroundProps) {
           {stage === "email" && (
             <form
               onSubmit={handleSubmit}
-              className="flex w-[260px] items-center gap-2 rounded-full bg-white py-1.5 pl-5 pr-1.5"
+              className="flex w-[260px] items-center gap-2 rounded-full bg-white py-[9px] pl-5 pr-[9px]"
             >
               <input
                 type="email"
