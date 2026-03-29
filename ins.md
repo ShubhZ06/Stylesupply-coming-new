@@ -14,7 +14,7 @@ live
 **Install:**
 ```bash
 npx create-next-app@latest --typescript --tailwind --app
-npm install lenis
+
 ```
 
 ---

@@ -2,7 +2,6 @@
 
 import { useState, type ReactNode } from "react";
 
-
 interface BackgroundProps {
   children: ReactNode;
 }
@@ -34,19 +33,15 @@ export function Background({ children }: BackgroundProps) {
   };
 
   return (
-    <main className="relative min-h-dvh overflow-hidden flex flex-col items-center">
-      {/* Silk fabric photo background */}
+    <main className="relative min-h-dvh flex flex-col items-center">
       <img
-        src="/image/bg2%201.svg"
+        src="/image/bg2%201.png"
         alt=""
         aria-hidden
         className="fixed inset-0 w-full h-full object-cover pointer-events-none select-none sm:object-center object-top"
       />
 
-      {/* Centered content column */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
-
-        {/* Heading */}
         <h1
           className="mt-10 mb-[-2rem] w-full text-center text-[26px] font-medium leading-[1.22] text-white sm:mt-17.5 sm:mb-0 sm:w-105.5 sm:text-[46px] relative"
           style={{ animation: "stagger-up 0.7s ease-out 0s both", zIndex: 0 }}
@@ -54,12 +49,10 @@ export function Background({ children }: BackgroundProps) {
           Join the waitlist to<br />be first in line.
         </h1>
 
-        {/* Envelope + WhiteCard slot — negative margin pulls it up over the heading */}
         <div className="relative w-full sm:mt-[-3.5rem] mt-2" style={{ zIndex: 10 }}>
           {children}
         </div>
 
-        {/* Launch date */}
         <p
           className="mt-3 font-semibold text-silver text-[21.4px] tracking-[-0.04em] whitespace-nowrap"
           style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
@@ -67,13 +60,10 @@ export function Background({ children }: BackgroundProps) {
           14th April
         </p>
 
-        {/* CTA area */}
         <div
           className="mt-3 flex flex-col items-center gap-[19px] w-full pb-14"
           style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}
         >
-
-          {/* Stage 1 — Join Now button */}
           {stage === "button" && (
             <button
               type="button"
@@ -84,7 +74,6 @@ export function Background({ children }: BackgroundProps) {
             </button>
           )}
 
-          {/* Stage 2 — Email input */}
           {stage === "email" && (
             <form
               onSubmit={handleSubmit}
@@ -107,9 +96,7 @@ export function Background({ children }: BackgroundProps) {
                 className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-brand transition-all duration-150 hover:opacity-80 disabled:opacity-50 active:scale-90"
               >
                 {loading ? (
-                  <span
-                    className="block h-[14px] w-[14px] animate-spin rounded-full border-2 border-white border-t-transparent"
-                  />
+                  <span className="block h-[14px] w-[14px] animate-spin rounded-full border-2 border-white border-t-transparent" />
                 ) : (
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                     <path
@@ -125,7 +112,6 @@ export function Background({ children }: BackgroundProps) {
             </form>
           )}
 
-          {/* Stage 3 — Success */}
           {stage === "success" && (
             <div className="flex w-[260px] items-center justify-center rounded-full bg-[#25080A] py-3.5">
               <p className="text-center text-[19px] font-semibold tracking-[-0.03em] text-[#FFFFFF]">
