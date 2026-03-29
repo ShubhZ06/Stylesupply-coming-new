@@ -9,7 +9,7 @@ export function CTASection() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email.trim()) return;
     setLoading(true);
@@ -20,13 +20,13 @@ export function CTASection() {
   };
 
   return (
-    <div className="mt-[45px] flex flex-col items-center gap-[19.191px] w-full pb-14">
+    <div className="mt-11.25 flex flex-col items-center gap-[19.191px] w-full pb-14">
       {/* Stage 1 — Join Now button */}
       {stage === "button" && (
         <button
           type="button"
           onClick={() => setStage("email")}
-          className="bg-white rounded-full font-bold text-[15.353px] text-[#7a021d] tracking-[-0.06em] hover:opacity-90 active:scale-95 transition-all duration-150 border border-white"
+          className="bg-white rounded-full font-bold text-[15.353px] text-brand tracking-[-0.06em] hover:opacity-90 active:scale-95 transition-all duration-150 border border-white"
           style={{ width: "191.907px", paddingTop: "16px", paddingBottom: "16px" }}
         >
           Join Now
@@ -37,7 +37,7 @@ export function CTASection() {
       {stage === "email" && (
         <form
           onSubmit={handleSubmit}
-          className="flex items-center bg-white rounded-full pl-5 pr-[5px] py-[5px] gap-2"
+          className="flex items-center bg-white rounded-full pl-5 pr-1.25 py-1.25 gap-2"
           style={{ width: "260px" }}
         >
           <input
@@ -48,13 +48,13 @@ export function CTASection() {
             required
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
-            className="flex-1 min-w-0 text-[13px] text-[#620a20] placeholder:text-[#620a20]/40 font-medium bg-transparent outline-none"
+            className="flex-1 min-w-0 text-[13px] text-brand-dark placeholder:text-brand-dark/40 font-medium bg-transparent outline-none"
           />
           <button
             type="submit"
             disabled={loading}
             aria-label="Submit email"
-            className="flex items-center justify-center shrink-0 bg-[#7a021d] rounded-full hover:opacity-80 active:scale-90 transition-all duration-150 disabled:opacity-50"
+            className="flex items-center justify-center shrink-0 bg-brand rounded-full hover:opacity-80 active:scale-90 transition-all duration-150 disabled:opacity-50"
             style={{ width: "38px", height: "38px" }}
           >
             {loading ? (
