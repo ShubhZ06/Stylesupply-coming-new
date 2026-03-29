@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #7a021d;
+  --color-brand-dark: #620a20;
+  --color-silver: #d9d9d9;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/**
+ * card-emerge — the white card slides upward out of the envelope.
+ * Uses a spring cubic-bezier so it slightly overshoots, then settles.
+ */
+@keyframes card-emerge {
+  0%   { transform: translateY(28px); opacity: 0; }
+  55%  { opacity: 1; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes envelope-scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes photo-reveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes input-appear {
+  from { opacity: 0; transform: scaleX(0.85); }
+  to   { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes success-pop {
+  0%   { opacity: 0; transform: scale(0.9) translateY(6px); }
+  70%  { transform: scale(1.03) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
