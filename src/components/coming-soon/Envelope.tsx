@@ -16,10 +16,11 @@ import { useState, useEffect } from "react";
  */
 export function Envelope() {
   const [peek, setPeek] = useState(false);
+  const [mobilePeek, setMobilePeek] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (window.innerWidth < 640) setPeek(true);
+      if (window.innerWidth < 640) setMobilePeek(true);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
@@ -62,7 +63,7 @@ export function Envelope() {
             zIndex: 10,
             width: "92%",
             left: "4%",
-            top: peek ? "2%" : "12%",
+            top: mobilePeek ? "5%" : peek ? "2%" : "12%",
             transition: "top 0.5s cubic-bezier(0.34,1.56,0.64,1)",
           }}
         >
@@ -120,7 +121,7 @@ export function Envelope() {
                 alt="Coming Soon"
                 draggable={false}
                 className="select-none"
-                style={{ width: "15.8%", height: "auto" }}
+                style={{ width: "20%", height: "auto" }}
               />
             </div>
 
@@ -131,7 +132,7 @@ export function Envelope() {
             */}
             <div
               className="absolute flex justify-center w-full"
-              style={{ top: "50%", left: 0 }}
+              style={{ top: "46%", left: 0 }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -146,7 +147,7 @@ export function Envelope() {
             {/* Social icons: top ≈ 72%, centered */}
             <div
               className="absolute flex justify-center items-center gap-2 w-full"
-              style={{ top: "72%", left: 0 }}
+              style={{ top: "65%", left: 0, transform: "rotate(-3.27deg)" }}
             >
               <a
                 href="https://www.instagram.com/stylesupply.io/"
@@ -194,8 +195,8 @@ export function Envelope() {
           className="absolute select-none pointer-events-none"
           style={{
             zIndex: 20,
-            width: "100%",
-            left: "0",
+            width: "95%",
+            left: "4.9%",
             bottom: "0",
             height: "auto",
           }}
