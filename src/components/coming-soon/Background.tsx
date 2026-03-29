@@ -58,7 +58,7 @@ export function Background({ children }: BackgroundProps) {
         {/* Heading */}
         <h1
           className="mt-17.5 text-white font-medium text-[38px] sm:text-[44px] text-center w-full sm:w-105.5"
-          style={{ lineHeight: "1.22" }}
+          style={{ lineHeight: "1.22", animation: "stagger-up 0.7s ease-out 0s both" }}
         >
           Join the waitlist to be first<sup className="text-[0.6em] align-super">+</sup> in line.
         </h1>
@@ -67,12 +67,18 @@ export function Background({ children }: BackgroundProps) {
         {children}
 
         {/* Launch date */}
-        <p className="mt-8 font-semibold text-silver text-[19.4px] tracking-[-0.04em] whitespace-nowrap">
+        <p
+          className="mt-8 font-semibold text-silver text-[19.4px] tracking-[-0.04em] whitespace-nowrap"
+          style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
+        >
           14th April
         </p>
 
         {/* CTA area */}
-        <div className="mt-[19px] flex flex-col items-center gap-[19px] w-full pb-14">
+        <div
+          className="mt-[19px] flex flex-col items-center gap-[19px] w-full pb-14"
+          style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}
+        >
 
           {/* Stage 1 — Join Now button */}
           {stage === "button" && (

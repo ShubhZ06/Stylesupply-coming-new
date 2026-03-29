@@ -12,27 +12,27 @@ import { ASSETS } from "./assets";
 export function WhiteCard() {
   return (
     <div
-      className="bg-white rounded-t-[16px]"
+      className="bg-white rounded-t-2xl"
       style={{ paddingBottom: "18px" }}
     >
       {/* Four product-image placeholders */}
-      <div className="flex gap-[7px] px-2 pt-[10px]">
+      <div className="flex gap-1.75 px-2 pt-2.5">
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
             className="flex-1 bg-silver rounded-[5px]"
-            style={{ height: "100px" }}
+            style={{ height: "58px" }}
           />
         ))}
       </div>
 
       {/* COMING SOON label */}
-      <p className="mt-[11px] text-center font-bold text-[6.1px] text-brand uppercase tracking-[0.1em]">
+      <p className="mt-2.75 text-center font-bold text-[6.1px] text-brand uppercase tracking-widest">
         Coming Soon
       </p>
 
       {/* STYLESUPPLY wordmark */}
-      <div className="flex justify-center mt-[4px]">
+      <div className="flex justify-center mt-1">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={ASSETS.logo}
@@ -42,7 +42,7 @@ export function WhiteCard() {
       </div>
 
       {/* Social links */}
-      <div className="flex justify-center gap-[5px] mt-[8px]">
+      <div className="flex justify-center gap-1.25 mt-2">
         <a
           href="https://instagram.com/stylesupply"
           aria-label="StyleSupply on Instagram"
