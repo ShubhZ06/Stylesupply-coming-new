@@ -162,7 +162,7 @@ export function Envelope() {
                   alt="Instagram"
                   draggable={false}
                   className="select-none"
-                  style={{ width: "24px", height: "24px" }}
+                  style={{ width: "36px", height: "36px" }}
                 />
               </a>
               <a
@@ -178,7 +178,7 @@ export function Envelope() {
                   alt="LinkedIn"
                   draggable={false}
                   className="select-none"
-                  style={{ width: "24px", height: "24px" }}
+                  style={{ width: "36px", height: "36px" }}
                 />
               </a>
             </div>
