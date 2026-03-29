@@ -31,10 +31,19 @@ export function Background({ children }: BackgroundProps) {
     e.preventDefault();
     if (!email.trim()) return;
     setLoading(true);
-    // TODO: replace with your waitlist API
-    await new Promise((r) => setTimeout(r, 800));
-    setStage("success");
-    setLoading(false);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setStage("success");
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
