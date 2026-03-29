@@ -40,7 +40,7 @@ export function Background({ children }: BackgroundProps) {
         src="/image/bg2%201.svg"
         alt=""
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none sm:object-center object-top"
       />
 
       {/* Centered content column */}
@@ -48,14 +48,14 @@ export function Background({ children }: BackgroundProps) {
 
         {/* Heading */}
         <h1
-          className="mt-17.5 w-full text-center text-[40px] font-medium leading-[1.22] text-white sm:w-105.5 sm:text-[46px] relative"
+          className="mt-10 mb-[-2rem] w-full text-center text-[26px] font-medium leading-[1.22] text-white sm:mt-17.5 sm:mb-0 sm:w-105.5 sm:text-[46px] relative"
           style={{ animation: "stagger-up 0.7s ease-out 0s both", zIndex: 0 }}
         >
-          Join the waitlist to be first in line.
+          Join the waitlist to<br />be first in line.
         </h1>
 
         {/* Envelope + WhiteCard slot — negative margin pulls it up over the heading */}
-        <div className="relative w-full" style={{ zIndex: 10, marginTop: "-3.5rem" }}>
+        <div className="relative w-full sm:mt-[-3.5rem] mt-2" style={{ zIndex: 10 }}>
           {children}
         </div>
 

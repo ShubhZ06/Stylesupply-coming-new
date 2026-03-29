@@ -23,7 +23,7 @@ export function Envelope() {
     <div
       className="group relative mx-auto mt-6 cursor-pointer z-10"
       style={{
-        width: "min(380px, 92vw)",
+        width: "min(380px, 72vw)",
         animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both",
       }}
       onMouseEnter={() => setPeek(true)}
@@ -50,7 +50,7 @@ export function Envelope() {
             zIndex: 10,
             width: "95%",
             left: "2%",
-            top: mobilePeek ? "8%" : peek ? "2%" : "10%",
+            top: mobilePeek ? "2%" : peek ? "2%" : "10%",
             transition: "top 0.5s cubic-bezier(0.34,1.56,0.64,1)",
           }}
         >
