@@ -48,14 +48,16 @@ export function Background({ children }: BackgroundProps) {
 
         {/* Heading */}
         <h1
-          className="mt-17.5 w-full text-center text-[40px] font-medium leading-[1.22] text-white sm:w-105.5 sm:text-[46px]"
-          style={{ animation: "stagger-up 0.7s ease-out 0s both" }}
+          className="mt-17.5 w-full text-center text-[40px] font-medium leading-[1.22] text-white sm:w-105.5 sm:text-[46px] relative"
+          style={{ animation: "stagger-up 0.7s ease-out 0s both", zIndex: 0 }}
         >
           Join the waitlist to be first in line.
         </h1>
 
-        {/* Envelope + WhiteCard slot */}
-        {children}
+        {/* Envelope + WhiteCard slot — negative margin pulls it up over the heading */}
+        <div className="relative w-full" style={{ zIndex: 10, marginTop: "-3.5rem" }}>
+          {children}
+        </div>
 
         {/* Launch date */}
         <p
