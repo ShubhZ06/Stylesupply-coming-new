@@ -58,7 +58,7 @@ export function Background({ children }: BackgroundProps) {
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
         <h1
-          className="mt-10 mb-[-2rem] w-full text-center text-[26px] font-medium leading-[1.22] text-white sm:mt-17.5 sm:mb-0 sm:w-105.5 sm:text-[46px] relative"
+          className="mt-28 mb-[-4.5rem] w-full text-center text-[34px] font-medium leading-[1.22] text-white sm:mt-17.5 sm:mb-0 sm:w-105.5 sm:text-[46px] relative"
           style={{ animation: "stagger-up 0.7s ease-out 0s both", zIndex: 0 }}
         >
           Join the waitlist to<br />be first in line.
