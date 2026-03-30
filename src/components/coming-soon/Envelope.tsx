@@ -50,7 +50,7 @@ export function Envelope() {
             zIndex: 10,
             width: "95%",
             left: "2%",
-            top: mobilePeek ? "2%" : peek ? "2%" : "10%",
+            top: mobilePeek ? "4%" : peek ? "2%" : "10%",
             transition: "top 0.5s cubic-bezier(0.34,1.56,0.64,1)",
           }}
         >
