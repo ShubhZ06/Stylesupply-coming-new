@@ -45,38 +45,28 @@ export function Background({ children }: BackgroundProps) {
         quality={80}
         className="fixed object-cover pointer-events-none select-none sm:object-center object-top hidden sm:block"
       />
-      {/* Mobile background */}
-      <Image
-        src="/image/background-mobile.png"
-        alt=""
-        aria-hidden
-        fill
-        priority
-        quality={80}
-        className="fixed object-cover object-center pointer-events-none select-none sm:hidden"
-      />
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
         <h1
-          className="mt-28 mb-[-4.5rem] w-full text-center text-[34px] font-medium leading-[1.22] text-white sm:mt-17.5 sm:mb-0 sm:w-105.5 sm:text-[46px] relative"
+          className="mt-28 mb-[-4.5rem] w-full text-center text-[34px] font-medium leading-[1.22] text-white sm:mt-6 sm:mb-0 sm:w-105.5 sm:text-[46px] relative"
           style={{ animation: "stagger-up 0.7s ease-out 0s both", zIndex: 0 }}
         >
           Join the waitlist to<br />be first in line.
         </h1>
 
-        <div className="relative w-full sm:mt-[-3.5rem] mt-2" style={{ zIndex: 10 }}>
+        <div className="relative w-full sm:mt-[-3.5rem] mt-2 sm:mb-0 mb-[30px]" style={{ zIndex: 10 }}>
           {children}
         </div>
 
         <p
-          className="mt-3 font-semibold text-silver text-[21.4px] tracking-[-0.04em] whitespace-nowrap"
+          className="mt-1 sm:mt-1 font-semibold text-silver text-[21.4px] tracking-[-0.04em] whitespace-nowrap"
           style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
         >
           14th April
         </p>
 
         <div
-          className="mt-3 flex flex-col items-center gap-[19px] w-full pb-14"
+          className="mt-[30px] sm:mt-1 flex flex-col items-center gap-[19px] w-full pb-14"
           style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}
         >
           {stage === "button" && (

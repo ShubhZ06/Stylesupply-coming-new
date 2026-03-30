@@ -71,10 +71,10 @@ export function Envelope() {
             <div
               className="absolute overflow-hidden"
               style={{
-                width: "86.4%",
-                left: "6.8%",
-                top: "5.3%",
-                height: "35.1%",
+                width: "92%",
+                left: "3.5%",
+                top: "3.5%",
+                height: "35%",
                 borderRadius: "6px 6px 3px 3px",
               }}
             >
