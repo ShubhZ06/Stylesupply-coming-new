@@ -35,6 +35,7 @@ export function Background({ children }: BackgroundProps) {
 
   return (
     <main className="relative min-h-dvh flex flex-col items-center">
+      {/* Desktop background */}
       <Image
         src="/image/bg2 1.png"
         alt=""
@@ -42,7 +43,17 @@ export function Background({ children }: BackgroundProps) {
         fill
         priority
         quality={80}
-        className="fixed object-cover pointer-events-none select-none sm:object-center object-top"
+        className="fixed object-cover pointer-events-none select-none sm:object-center object-top hidden sm:block"
+      />
+      {/* Mobile background */}
+      <Image
+        src="/image/background-mobile.png"
+        alt=""
+        aria-hidden
+        fill
+        priority
+        quality={80}
+        className="fixed object-cover object-center pointer-events-none select-none sm:hidden"
       />
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-97.5 md:max-w-120 px-5">
