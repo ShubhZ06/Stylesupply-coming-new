@@ -21,7 +21,7 @@ export function Envelope() {
 
   return (
     <div
-      className="group relative mx-auto mt-6 sm:mt-6 mt-10.5 cursor-pointer z-10"
+      className="group relative mx-auto sm:mt-6 mt-14 cursor-pointer z-10"
       style={{
         width: "min(380px, 72vw)",
         animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both",
