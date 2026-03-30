@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     description: "Join the waitlist to be first in line.",
     type: "website",
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+  },
 };
 
 export default function RootLayout({

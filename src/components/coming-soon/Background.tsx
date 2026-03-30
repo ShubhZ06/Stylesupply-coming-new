@@ -34,7 +34,7 @@ export function Background({ children }: BackgroundProps) {
   };
 
   return (
-    <main className="relative min-h-dvh flex flex-col items-center">
+    <main className="relative min-h-dvh w-full flex flex-col items-center overflow-hidden">
       {/* Desktop background */}
       <Image
         src="/image/bg2 1.png"
