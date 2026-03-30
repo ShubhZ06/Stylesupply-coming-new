@@ -59,7 +59,7 @@ export function Background({ children }: BackgroundProps) {
         </div>
 
         <p
-          className="mt-1 sm:mt-1 font-semibold text-silver text-[21.4px] tracking-[-0.04em] whitespace-nowrap"
+          className="mt-1 sm:mt-1 font-semibold text-white text-[21.4px] tracking-[-0.04em] whitespace-nowrap"
           style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
         >
           14th April
