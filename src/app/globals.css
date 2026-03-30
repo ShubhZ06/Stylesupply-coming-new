@@ -137,6 +137,6 @@ body {
   min-height: 100dvh;
   padding-bottom: env(safe-area-inset-bottom);
   font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  background-color: transparent;
+  background-color: #470917;
   overflow-x: hidden;
 }
