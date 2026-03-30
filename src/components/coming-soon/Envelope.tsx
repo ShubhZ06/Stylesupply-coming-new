@@ -83,7 +83,7 @@ export function Envelope() {
                 src="/image/Frame%205303.png"
                 alt="Fashion preview"
                 draggable={false}
-                className="w-full h-full object-fill select-none"
+                className="w-full h-full object-contain select-none"
               />
             </div>
 
