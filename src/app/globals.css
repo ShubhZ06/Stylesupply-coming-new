@@ -89,7 +89,7 @@ body {
 @media (max-width: 639px) {
   body {
     background-image: url('/image/background-mobile.png');
-    background-size: 130%;
+    background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
     background-attachment: scroll;
