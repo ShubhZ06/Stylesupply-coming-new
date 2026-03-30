@@ -21,7 +21,7 @@ export function Envelope() {
 
   return (
     <div
-      className="group relative mx-auto sm:mt-6 mt-14 cursor-pointer z-10"
+      className="group relative mx-auto sm:mt-6 mt-14 cursor-pointer z-10 overflow-visible"
       style={{
         width: "min(380px, 72vw)",
         animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both",
@@ -29,18 +29,18 @@ export function Envelope() {
       onMouseEnter={() => setPeek(true)}
       onMouseLeave={() => setPeek(false)}
     >
-      {/* Root sized to open envelope aspect: Mask group (2) */}
-      <div className="relative w-full" style={{ paddingBottom: `${(390 / 319) * 100}%` }}>
+      {/* Container sized to Mask 2 (back envelope) aspect: 391×436 */}
+      <div className="relative w-full overflow-visible" style={{ paddingBottom: `${(436 / 391) * 100}%` }}>
 
         {/* ── Layer 0: Open envelope body (back) ── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/image/Mask%20group%20(2).png"
+          src="/image/Mask%20group%20(2).png?v=2"
           alt=""
           aria-hidden
           draggable={false}
-          className="absolute inset-0 w-full h-full select-none pointer-events-none"
-          style={{ zIndex: 0 }}
+          className="absolute select-none pointer-events-none"
+          style={{ zIndex: 0, top: "10%", left: "42%", transform: "translateX(-50%) scale(1.35)" }}
         />
 
         {/* ── Layer 1: White card (slides up on hover) ── */}
@@ -48,117 +48,39 @@ export function Envelope() {
           className="absolute"
           style={{
             zIndex: 10,
-            width: "95%",
-            left: "2%",
-            top: mobilePeek ? "4%" : peek ? "2%" : "10%",
+            width: "110%",
+            left: "-1%",
+            top: mobilePeek ? "-2%" : peek ? "-3%" : "5%",
             transition: "top 0.5s cubic-bezier(0.34,1.56,0.64,1)",
+            animation: "card-emerge 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.4s both",
           }}
         >
-          {/* Card aspect ratio: ~302/316 */}
           <div className="relative w-full" style={{ paddingBottom: `${(302 / 316) * 100}%` }}>
-
-            {/* White card base */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/image/Rectangle%2018940%20(1).png"
-              alt=""
-              aria-hidden
+              src="/image/Group%201810.png"
+              alt="StyleSupply Coming Soon"
               draggable={false}
-              className="absolute inset-0 w-full h-full object-fill select-none pointer-events-none"
+              className="absolute inset-0 w-full h-full object-contain select-none pointer-events-none"
+              style={{ transform: "scale(1.05)" }}
             />
-
-            {/* Photo strip */}
-            <div
-              className="absolute overflow-hidden"
-              style={{
-                width: "92%",
-                left: "3.5%",
-                top: "3.5%",
-                height: "35%",
-                borderRadius: "6px 6px 3px 3px",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/image/Frame%205303.png"
-                alt="Fashion preview"
-                draggable={false}
-                className="w-full h-full object-contain select-none"
-              />
-            </div>
-
-            {/* Coming Soon label */}
-            <div
-              className="absolute flex justify-center w-full"
-              style={{ top: "43%", left: 0 }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/image/Coming%20Soon%20(1).svg"
-                alt="Coming Soon"
-                draggable={false}
-                className="select-none"
-                style={{ width: "20%", height: "auto" }}
-              />
-            </div>
-
-            {/* STYLESUPPLY logo */}
-            <div
-              className="absolute flex justify-center w-full"
-              style={{ top: "46%", left: 0 }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/image/STYLESUPPLY%20(1).svg"
-                alt="StyleSupply"
-                draggable={false}
-                className="select-none"
-                style={{ width: "80.4%", height: "auto" }}
-              />
-            </div>
-
-            {/* Social icons */}
             <div
               className="absolute flex justify-center items-center gap-2 w-full"
-              style={{ top: "65%", left: 0, transform: "rotate(-3.27deg)" }}
+              style={{ top: "62%", left: 0, transform: "rotate(-3.27deg)" }}
             >
-              <a
-                href="https://www.instagram.com/stylesupply.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="transition-transform hover:scale-110"
-              >
+              <a href="https://www.instagram.com/stylesupply.io/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/icon/Frame%203748.svg"
-                  alt="Instagram"
-                  draggable={false}
-                  className="select-none"
-                  style={{ width: "36px", height: "36px" }}
-                />
+                <img src="/icon/Frame%203748.svg" alt="Instagram" draggable={false} className="select-none" style={{ width: "36px", height: "36px" }} />
               </a>
-              <a
-                href="https://www.linkedin.com/company/style-supply-co/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="transition-transform hover:scale-110"
-              >
+              <a href="https://www.linkedin.com/company/style-supply-co/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-transform hover:scale-110">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/icon/Frame%203747.svg"
-                  alt="LinkedIn"
-                  draggable={false}
-                  className="select-none"
-                  style={{ width: "36px", height: "36px" }}
-                />
+                <img src="/icon/Frame%203747.svg" alt="LinkedIn" draggable={false} className="select-none" style={{ width: "36px", height: "36px" }} />
               </a>
             </div>
           </div>
         </div>
 
-        {/* ── Layer 2: Closed front flap — sits on top, covers bottom of card ── */}
+        {/* ── Layer 2: Closed front flap ── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/image/Mask%20group%20(1).png"
@@ -168,9 +90,9 @@ export function Envelope() {
           className="absolute select-none pointer-events-none"
           style={{
             zIndex: 20,
-            width: "100%",
-            left: "0%",
-            bottom: "0",
+            width: "160%",
+            left: "5%",
+            bottom: "-5%",
             height: "auto",
           }}
         />

@@ -5,8 +5,9 @@ const nextConfig: NextConfig = {
     reactCompiler: true,
   },
   compress: true,
+  allowedDevOrigins: ["192.168.1.105"],
   images: {
-    formats: ["image/avif", "image/webp"],
+    qualities: [75, 80, 100],
     remotePatterns: [
       {
         protocol: "https",
