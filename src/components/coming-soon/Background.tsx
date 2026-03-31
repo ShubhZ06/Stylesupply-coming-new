@@ -57,10 +57,10 @@ export function Background({ children }: BackgroundProps) {
         className="fixed object-cover pointer-events-none select-none object-center block sm:hidden"
       />
 
-      <div className="relative z-10 flex items-center justify-center w-full min-h-dvh">
+      <div className="relative z-10 flex items-center justify-center w-full min-h-dvh py-[3vh]">
         <div className="flex flex-col items-center w-[90%] max-w-[480px]">
           <h1
-            className="w-full text-center text-[clamp(32px,5vw,46px)] font-medium leading-[1.18] text-white tracking-[-0.04em] relative z-[5] mb-[-3.2rem] sm:translate-y-[-1.5rem]"
+            className="w-full text-center text-[clamp(32px,4.5vw,46px)] font-medium leading-[1.18] text-white tracking-[-0.04em] relative z-[5] mb-[-3.2rem] sm:mb-[clamp(-3.2rem,-4vh,-1.5rem)] sm:translate-y-[clamp(-1.5rem,-2vh,-0.25rem)]"
             style={{ animation: "stagger-up 0.7s ease-out 0s both" }}
           >
             Join the waitlist to<br />be first in line.
@@ -71,14 +71,14 @@ export function Background({ children }: BackgroundProps) {
           </div>
 
           <div
-            className="flex flex-col items-center w-full mt-[55px]"
+            className="flex flex-col items-center w-full mt-[clamp(30px,5vh,55px)]"
             style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
           >
-            <p className="font-semibold text-white text-[clamp(26px,4vw,32px)] tracking-[-0.04em] whitespace-nowrap leading-[38px]">
+            <p className="font-semibold text-white text-[clamp(24px,3.5vw,32px)] tracking-[-0.04em] whitespace-nowrap leading-[1.2]">
               14th April
             </p>
 
-            <div className="flex flex-col items-center gap-[20px] w-full mt-[30px]" style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}>
+            <div className="flex flex-col items-center gap-[clamp(14px,2.5vh,20px)] w-full mt-[clamp(18px,3vh,30px)]" style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}>
               {stage === "button" && (
                 <button
                   type="button"

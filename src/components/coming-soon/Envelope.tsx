@@ -21,9 +21,9 @@ export function Envelope() {
 
   return (
     <div
-      className="group relative mx-auto sm:mt-6 mt-14 cursor-pointer z-10 overflow-visible"
+      className="group relative mx-auto mt-14 sm:mt-[clamp(0.5rem,1.5vh,1.5rem)] cursor-pointer z-10 overflow-visible"
       style={{
-        width: "min(380px, 72vw)",
+        width: "min(380px, 72vw, 45vh)",
         animation: "envelope-scale-in 0.65s cubic-bezier(0.25,1,0.5,1) 0.1s both",
       }}
       onMouseEnter={() => setPeek(true)}
