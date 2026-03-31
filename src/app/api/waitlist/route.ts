@@ -26,14 +26,15 @@ export async function POST(req: Request) {
 
     const sheets = google.sheets({ version: "v4", auth });
 
-    // Format timestamp as DD/MM/YY HH:MM:SS
+    // Format timestamp as DD/MM/YY HH:MM:SS in IST
     const now = new Date();
-    const dd = String(now.getDate()).padStart(2, "0");
-    const mm = String(now.getMonth() + 1).padStart(2, "0");
-    const yy = String(now.getFullYear()).slice(-2);
-    const hh = String(now.getHours()).padStart(2, "0");
-    const min = String(now.getMinutes()).padStart(2, "0");
-    const ss = String(now.getSeconds()).padStart(2, "0");
+    const ist = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+    const dd = String(ist.getDate()).padStart(2, "0");
+    const mm = String(ist.getMonth() + 1).padStart(2, "0");
+    const yy = String(ist.getFullYear()).slice(-2);
+    const hh = String(ist.getHours()).padStart(2, "0");
+    const min = String(ist.getMinutes()).padStart(2, "0");
+    const ss = String(ist.getSeconds()).padStart(2, "0");
     const timestamp = `${dd}/${mm}/${yy} ${hh}:${min}:${ss}`;
 
     await sheets.spreadsheets.values.append({
