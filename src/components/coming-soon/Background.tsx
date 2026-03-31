@@ -54,13 +54,13 @@ export function Background({ children }: BackgroundProps) {
         fill
         priority
         quality={80}
-        className="fixed object-cover pointer-events-none select-none object-center block sm:hidden"
+        className="fixed object-cover pointer-events-none select-none object-center block sm:hidden scale-[1.3] origin-top translate-x-[10%]"
       />
 
       <div className="relative z-10 flex items-center justify-center w-full min-h-dvh py-[3vh]">
         <div className="flex flex-col items-center w-[90%] max-w-[480px]">
           <h1
-            className="w-full text-center text-[clamp(32px,4.5vw,46px)] font-medium leading-[1.18] text-white tracking-[-0.04em] relative z-[5] mb-[-3.2rem] sm:mb-[clamp(-3.2rem,-4vh,-1.5rem)] sm:translate-y-[clamp(-1.5rem,-2vh,-0.25rem)]"
+            className="w-full text-center text-[clamp(32px,4.5vw,46px)] font-medium leading-[1.18] text-white tracking-[-0.04em] relative z-[5] mb-[-20px] mt-[24px] sm:mt-[clamp(44px,6.6vh,77px)] sm:mb-[clamp(16px,2.5vh,28px)]"
             style={{ animation: "stagger-up 0.7s ease-out 0s both" }}
           >
             Join the waitlist to<br />be first in line.
@@ -71,7 +71,7 @@ export function Background({ children }: BackgroundProps) {
           </div>
 
           <div
-            className="flex flex-col items-center w-full mt-[clamp(30px,5vh,55px)]"
+            className="flex flex-col items-center w-full mt-[clamp(40px,6.5vh,70px)] relative z-[11]"
             style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
           >
             <p className="font-semibold text-white text-[clamp(24px,3.5vw,32px)] tracking-[-0.04em] whitespace-nowrap leading-[1.2]">

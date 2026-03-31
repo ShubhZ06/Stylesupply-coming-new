@@ -65,8 +65,8 @@ export function Envelope() {
               style={{ transform: "scale(1.05)" }}
             />
             <div
-              className="absolute flex justify-center items-center gap-2 w-full"
-              style={{ top: "62%", left: 0, transform: "rotate(-3.27deg)" }}
+              className="absolute flex justify-center items-center gap-2 w-full top-[65%] sm:top-[62%]"
+              style={{ left: 0, transform: "rotate(-3.27deg)" }}
             >
               <a href="https://www.instagram.com/stylesupply.io/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
