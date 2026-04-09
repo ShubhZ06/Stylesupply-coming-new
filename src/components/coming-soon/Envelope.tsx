@@ -70,7 +70,7 @@ export function Envelope() {
             >
               <a href="https://www.instagram.com/stylesupply.io/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icon/Frame%203748.svg" alt="Instagram" draggable={false} className="select-none" style={{ width: "36px", height: "36px" }} />
+                <img src="/icon/Instagram_Redbg.svg" alt="Instagram" draggable={false} className="select-none" style={{ width: "36px", height: "36px" }} />
               </a>
               <a href="https://www.linkedin.com/company/style-supply-co/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-transform hover:scale-110">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
