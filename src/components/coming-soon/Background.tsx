@@ -75,7 +75,7 @@ export function Background({ children }: BackgroundProps) {
             style={{ animation: "stagger-up 0.7s ease-out 0.65s both" }}
           >
             <p className="font-semibold text-white text-[clamp(24px,3.5vw,32px)] tracking-[-0.04em] whitespace-nowrap leading-[1.2]">
-              14th April
+              19th April
             </p>
 
             <div className="flex flex-col items-center gap-[clamp(14px,2.5vh,20px)] w-full mt-[clamp(18px,3vh,30px)]" style={{ animation: "stagger-up 0.7s ease-out 0.75s both" }}>
